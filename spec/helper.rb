@@ -1,5 +1,3 @@
-require 'rubygems'
-
 begin
   require 'bundler'
 rescue LoadError => e
@@ -16,7 +14,5 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
-require 'test/unit'
-
-class Test::Unit::TestCase
-end
+require "minitest/autorun"
+require 'minitest/hell' # parallelize testing
