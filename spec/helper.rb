@@ -15,4 +15,4 @@ rescue Bundler::BundlerError => e
 end
 
 require "minitest/autorun"
-require 'minitest/hell' # parallelize testing
+# require 'minitest/hell' # parallelize testing
