@@ -14,5 +14,10 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
+def support_file_path(relative_path)
+  return File.expand_path(File.join("spec_support", relative_path), File.dirname(__FILE__))
+end
+
+
 require "minitest/autorun"
 # require 'minitest/hell' # parallelize testing

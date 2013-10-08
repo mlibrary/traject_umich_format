@@ -1,4 +1,4 @@
-require 'traject/umich_format/version'
+require 'traject'
 require 'traject/umich_format/bib_format'
 require 'traject/umich_format/bib_types'
 
@@ -26,14 +26,7 @@ class Traject::UMichFormat
   def initialize(marc_record)
     @record     = marc_record
     @bib_format = BibFormat.new(record).code
-    @types      = BibTypes.new(@bib_format, record).codes
-  end
-
-  def format_and_types
-    types = @types.dup
-    types.unshift bib_format
-    types
+    @types      = BibTypes.new(record).codes
   end
 
 end
-
