@@ -1,6 +1,7 @@
 require 'traject/umich_format/version'
 require 'traject/umich_format/bib_format'
 require 'traject/umich_format/bib_types'
+require 'traject/umich_format/macros'
 
 # Encapsulates logic that uses University of Michigan University Library
 # rules to determine both bib format (book, serial, visual

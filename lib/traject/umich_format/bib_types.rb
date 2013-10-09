@@ -216,7 +216,7 @@ class Traject::UMichFormat::BibTypes
 
 
   def microform_types
-    next unless record['008']
+    return [] unless record['008']
     types = ['WM']
     f8_23 = record['008'].value[23]
     return types if %w[BK MU SE MX].include?(bib_format) && %w[a b c].include?(f8_23)
