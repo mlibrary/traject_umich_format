@@ -69,6 +69,8 @@ Additionally, each record may have one or more of the following more specific ty
 
 
 ## A sample traject configuration file
+
+```ruby
 require 'traject'
 require 'traject_umich_format'
 extend Traject::UMichFormat::Macros
