@@ -72,7 +72,7 @@ Additionally, each record may have one or more of the following more specific ty
 
 ```ruby
 require 'traject'
-require 'traject_umich_format'
+require 'traject/umich_format'
 extend Traject::UMichFormat::Macros
 
 to_field 'id', extract_marc('001', :first=>true)
