@@ -84,22 +84,18 @@ class Traject::UMichFormat::BibTypes
     types << 'VB' if self['007[0-5]'].grep(/v...s/i).size > 0
     types << 'VB' if self['852j'].grep(/\A(?:bd-rom|video-b)/i).size > 0
 
+    @record.fields('007').map{|f| f.value}.each do |f|
+      if (f[0] == 'v') || self['008[33]'].include?('v')
+        types << 'VD' if f[4] == 'v'
+        types << 'VH' if f[4] == 'b'
+      end
+    end
 
-    types << 'VD' if self['007[4]'].include?('v') &&
-        (
-        self['007[0]'].include?('v') ||
-            self['008[33]'].include?('v')
-        )
 
     types << 'VD' if self['538a'].grep(/\Advd/i).size > 0
 
     types << 'VH' if self['538a'].grep(/\AVHS/i).size > 0
 
-    types << 'VH' if self['007[4]'].include?('b') &&
-        (
-        self['007[0]'].include?('v') ||
-            self['008[33]'].include?('v')
-        )
 
     types << 'VL' if self['007[0]'].include?('m')
     types << 'VL' if (self.bib_format == 'VM') && self['008[33]'].include?('m')
@@ -151,10 +147,14 @@ class Traject::UMichFormat::BibTypes
     f8524 = record.fields('852').select{|f| f.indicator1 == '4'}
 
     # RC
-    types << 'RC' if  %w[i j].include?(ldr6) &&
-        (bib_format == 'MU')  &&
-        self['007[1]'].include?('d') &&
-        self['007[12]'].include?('e')
+    if %w[i j].include?(ldr6) && (bib_format == 'MU') 
+      @record.fields('007').map{|f| f.value}.each do |f|
+        if f[1] == 'd' && f[12] == 'e'
+          types << 'RC'
+          break
+        end
+      end
+    end
 
     f8524.each do |f|
       if (f['b'].upcase == 'MUSIC') && (f['j'] =~ /\ACD/i)
@@ -213,7 +213,6 @@ class Traject::UMichFormat::BibTypes
   #                                         008   F29-01     EQUAL      [a,b,c]
   # TYP   WM Microform                      FMT   F00-02     EQUAL      VM
   #                                         008   F29-01     EQUAL      [a,b,c]
-
 
   def microform_types
     return [] unless record['008']
@@ -377,10 +376,10 @@ class Traject::UMichFormat::BibTypes
 
     return ['XC'] if  (record['008'] && (record['008'].value[29] == '1')) || record.fields(['111', '711', '811']).size > 0
 
-    if  (bib_format == 'CF') &&
-        ((self['006[0]'] & %w[a s]).size > 0) &&
-        self['006[12]'].include?('1')
-      return ['XC']
+    if  (bib_format == 'CF')
+      @record.fields('006').map{|f| f.value}.each do |f|
+        return ['XC'] if  %w[a s].include?(f[0]) && (f[12] == '1')
+      end
     end
 
     if  (bib_format == 'MU') &&
