@@ -9,7 +9,7 @@ require 'traject/umich_format/xv6xx'
 
 class Traject::UMichFormat::BibTypes
 
-  attr_reader :codes, :bib_format, :record
+  attr_reader :bib_format, :record
 
   def initialize(bib_format, record)
     @bib_format = bib_format
@@ -19,27 +19,33 @@ class Traject::UMichFormat::BibTypes
 
     # Need these a lot -- the sub x and v from any 6XX field
     @xv6XX      = Traject::UMichFormat::XV6XX.new(@record)
-
-    @codes = []
-    @codes.concat self.video_types
-    @codes.concat self.audio_types
-    @codes.concat self.microform_types
-    @codes.concat self.musical_score_types
-    @codes.concat self.map_types
-    @codes.concat self.serial_types
-    @codes.concat self.mixed_types
-    @codes.concat self.software_types
-    @codes.concat self.statistics_types
-    @codes.concat self.conference_types
-    @codes.concat self.biography_types
-    @codes.concat self.reference_types
-    @codes.concat self.pp_types
-    @codes.concat self.videogame_types
-
-    @codes.uniq!
-    @codes.compact!
-
   end
+  
+  
+  def codes
+    codes = []
+    codes.concat self.video_types
+    codes.concat self.audio_types
+    codes.concat self.microform_types
+    codes.concat self.musical_score_types
+    codes.concat self.map_types
+    codes.concat self.serial_types
+    codes.concat self.mixed_types
+    codes.concat self.software_types
+    codes.concat self.statistics_types
+    codes.concat self.conference_types
+    codes.concat self.biography_types
+    codes.concat self.reference_types
+    codes.concat self.pp_types
+    codes.concat self.videogame_types
+
+    codes.uniq!
+    codes.compact!
+    
+    codes
+  end
+    
+  
 
   # Provide memoized values for on-the-fly created MarcExtractor
   # objects
@@ -100,6 +106,7 @@ class Traject::UMichFormat::BibTypes
     types << 'VL' if self['007[0]'].include?('m')
     types << 'VL' if (self.bib_format == 'VM') && self['008[33]'].include?('m')
 
+    types.uniq!
     return types
   end
 
@@ -192,6 +199,7 @@ class Traject::UMichFormat::BibTypes
     # RU
     types << 'RU' if %w[i j].include?(ldr6) && (bib_format == 'MU')
 
+    types.uniq!
     return types
   end
 
@@ -287,6 +295,8 @@ class Traject::UMichFormat::BibTypes
     types << 'SX' if %w[b s].include?(record.leader[7])
     types.concat journal_types
     types.concat newspaper_types
+    types.uniq!
+    return types
   end
 
 
@@ -313,6 +323,7 @@ class Traject::UMichFormat::BibTypes
       types << 'AJ'
     end
 
+    types.uniq!
     return types
   end
 
@@ -353,6 +364,7 @@ class Traject::UMichFormat::BibTypes
         types << 'CS'
       end
     end
+    types.uniq!
     return types
   end
 
@@ -463,6 +475,7 @@ class Traject::UMichFormat::BibTypes
     types << 'DI' if @xv6XX.match? /dictionaries/i
     types << 'DR' if @xv6XX.match? /directories/i
 
+    types.uniq!
     return types
   end
 

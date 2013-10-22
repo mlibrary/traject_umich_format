@@ -1,3 +1,8 @@
+### 0.1.3 / 2013-10-22
+
+* Call #uniq! before exiting from each indiviual type checker to allow easier calling of just the ones you want.
+* Refact type#codes into its own method instead of doing all the work on initialization
+
 ### 0.1.2 / 2013-10-22
 
 * Fix types logic so tests against different characters in the 007 or 006 must come from the
