@@ -394,8 +394,8 @@ class Traject::UMichFormat::BibTypes
       end
     end
 
-    if  (bib_format == 'MU') &&
-        (record['008'].value[30-31] =~ /c/)
+    if  (bib_format == 'MU') && record['008'] &&
+        (record['008'].value[30..31] =~ /c/)
       return ['XC']
     end
 
