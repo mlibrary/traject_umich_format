@@ -1,3 +1,8 @@
+### 0.2.0 / 2013-11-13
+
+* Make LP format detection more liberal (thank you for pull request, @jrochkind)
+* Narrow definition of DVD to avoid getting DVD-ROMs incorrectly (again, with the @jrochkind)
+
 ### 0.1.3 / 2013-10-22
 
 * Call #uniq! before exiting from each indiviual type checker to allow easier calling of just the ones you want.
