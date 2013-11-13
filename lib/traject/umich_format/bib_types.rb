@@ -98,7 +98,7 @@ class Traject::UMichFormat::BibTypes
     end
 
 
-    types << 'VD' if self['538a'].grep(/\Advd/i).size > 0
+    types << 'VD' if self['538a'].grep(/\Advd(?!\-rom)/i).size > 0
 
     types << 'VH' if self['538a'].grep(/\AVHS/i).size > 0
 
