@@ -44,6 +44,14 @@ describe 'audio' do
                  ].sort(), output['formats'].sort
   end
 
+  it "identifies a somewhat weird LP as an LP" do
+    @record = MARC::Reader.new(support_file_path 'audio_lp.mrc').first
+    @umf    = Traject::UMichFormat.new(@record)
+
+    assert_equal 'MU', @umf.bib_format
+    assert @umf.types.include?("RL"), "types include 'RL'"
+  end
+
 end
 
 describe "macros" do

@@ -174,7 +174,8 @@ class Traject::UMichFormat::BibTypes
 
     if  (bib_format == 'MU') && %w[i j].include?(ldr6) && self['007[1]'].include?('d')
       record.fields('300').each do |f|
-        if (f['a'] =~ /SOUND DISC/i) && (f['b'] =~ /33 1\/3 RPM/i)
+        str = f.subfields.collect {|s| s.value}.join(' ')
+        if (str =~ /DISC/i) && str =~ /33 1\/3 RPM/i
           types << 'RL'
           break
         end
@@ -394,8 +395,8 @@ class Traject::UMichFormat::BibTypes
       end
     end
 
-    if  (bib_format == 'MU') &&
-        (record['008'].value[30-31] =~ /c/)
+    if  (bib_format == 'MU') && record['008'] &&
+        (record['008'].value[30..31] =~ /c/)
       return ['XC']
     end
 
