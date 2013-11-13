@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 gemspec
 
-gem 'traject'
+gem 'traject', '>=1.0.0.beta.7'
 gem 'yell'
 
 group :development do
