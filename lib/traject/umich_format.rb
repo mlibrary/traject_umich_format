@@ -33,6 +33,7 @@ class Traject::UMichFormat
   def format_and_types
     types = @types.dup
     types.unshift bib_format
+    types.uniq!
     types
   end
 
