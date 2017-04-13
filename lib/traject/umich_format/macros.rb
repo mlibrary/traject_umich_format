@@ -44,7 +44,7 @@ module Traject::UMichFormat::Macros
     tmap = Traject::TranslationMap.new('umich/format')
     ->(record, acc, context) do
       context.clipboard[:umich_format_obj] ||= Traject::UMichFormat.new(record)
-      acc.concat context.clipboard[:umich_format_obj].format_and_types.map{|x| tmap[x]}
+      acc.concat context.clipboard[:umich_format_obj].format_and_types.map{|x| tmap[x]}.uniq
     end
   end
 
