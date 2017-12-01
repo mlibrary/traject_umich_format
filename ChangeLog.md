@@ -1,3 +1,8 @@
+### 0.3.0 / 2017-04-13
+
+* Call `uniq` on the list of formats before it's returned, since _serial_ can sometimes come
+from two non-mutually-exclusive places. Thanks to @timothyprettyman.
+
 ### 0.2.0 / 2013-11-13
 
 * Make LP format detection more liberal (thank you for pull request, @jrochkind)
