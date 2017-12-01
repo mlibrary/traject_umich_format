@@ -1,3 +1,7 @@
+### 0.4.0 / 2017-12-01
+
+* Improve recognition of audio and CD formats
+
 ### 0.3.0 / 2017-04-13
 
 * Call `uniq` on the list of formats before it's returned, since _serial_ can sometimes come
