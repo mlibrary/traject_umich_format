@@ -163,6 +163,14 @@ class Traject::UMichFormat::BibTypes
       end
     end
 
+    # RC:  007/00 is 's' and 007/01 is 'd' and 007/06 is 'g'
+    @record.fields('007').map{|f| f.value}.each do |f|
+      if (f[0] == 's') && (f[1] == 'd') && (f[6] == 'g')
+        types << 'RC'
+        break
+      end
+    end
+
     f8524.each do |f|
       if (f['b'].upcase == 'MUSIC') && (f['j'] =~ /\ACD/i)
         types << 'RC'
@@ -354,6 +362,7 @@ class Traject::UMichFormat::BibTypes
   # TYP   CR CDROM                          852## j          MATCH      cdrom*
   # TYP   CR CDROM                          852## j          MATCH      cd-rom*
   # TYP   CS Software                       852## j          MATCH      software*
+  # CR:  007/00 is 'c' and 007/01 is 'o' and 007/04 is 'g'
 
   def software_types
     types = []
@@ -365,6 +374,14 @@ class Traject::UMichFormat::BibTypes
         types << 'CS'
       end
     end
+
+    # CR:  007/00 is 'c' and 007/01 is 'o' and 007/04 is 'g'
+    @record.fields('007').map{|f| f.value}.each do |f|
+      if (f[0] == 'c') && (f[1] == 'o') && (f[4] == 'g')
+        types << 'CR'
+      end
+    end
+
     types.uniq!
     return types
   end

@@ -52,6 +52,15 @@ describe 'audio' do
     assert @umf.types.include?("RL"), "types include 'RL'"
   end
 
+  it "identifies an audio CD from the 007 field" do
+    @record = MARC::Reader.new(support_file_path 'audio_cd_007.mrc').first
+    @umf    = Traject::UMichFormat.new(@record)
+
+    puts 'types from audio_cd_007.mrc file: ' + @umf.types.join(',')
+    #assert_equal 'MU', @umf.bib_format
+    assert @umf.types.include?("RC"), "types include 'RC'"
+  end
+
 end
 
 describe "macros" do
