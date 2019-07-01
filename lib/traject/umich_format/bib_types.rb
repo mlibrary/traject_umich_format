@@ -38,6 +38,7 @@ class Traject::UMichFormat::BibTypes
     codes.concat self.reference_types
     codes.concat self.pp_types
     codes.concat self.videogame_types
+    codes.concat self.boardgame_types
 
     codes.uniq!
     codes.compact!
@@ -564,6 +565,23 @@ class Traject::UMichFormat::BibTypes
     else
       return []
     end
+  end
+
+  #  TYP   BG Board Games                    655## a          MATCH      board games
+  #  TYP   BG Board Games                    655## a          MATCH      card games
+  #  TYP   BG Board Games                    852## j          MATCH      game board*
+  #  TYP   BG Board Games                    LDR   F06-01     EQUAL      [g,k,o,r]
+  #                                          008   F33-01     EQUAL      g
+  #  TYP   BG Board Games                    LDR   F06-01     EQUAL      [g,k,o,r]
+  #                                          006   F16-01     EQUAL      g
+
+
+  def boardgame_types
+     return ['BG'] if self['655a'].grep(/\A(board|card) games/i).size > 0 
+     return ['BG'] if self['852j'].grep(/\Agame board/i).size > 0
+     return ['BG'] if %w[g k o r].include?(record.leader[6]) && (self['008[33]'].include? 'g') 
+     return ['BG'] if %w[g k o r].include?(record.leader[6]) && (self['006[16`]'].include? 'g') 
+    return []
   end
 
 

@@ -3,6 +3,7 @@
     "AN" => "Newspaper",
     "BI" => "Biography",
     "BK" => "Book",
+    "BG" => "Board Games",
     "CE" => "Data File",
     "CF" => "Data File",
     "CR" => "CDROM",
