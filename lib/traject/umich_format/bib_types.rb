@@ -580,7 +580,7 @@ class Traject::UMichFormat::BibTypes
      return ['BG'] if self['655a'].grep(/\A(board|card) games/i).size > 0 
      return ['BG'] if self['852j'].grep(/\Agame board/i).size > 0
      return ['BG'] if %w[g k o r].include?(record.leader[6]) && (self['008[33]'].include? 'g') 
-     return ['BG'] if %w[g k o r].include?(record.leader[6]) && (self['006[16`]'].include? 'g') 
+     return ['BG'] if %w[g k o r].include?(record.leader[6]) && (self['006[16]'].include? 'g') 
     return []
   end
 
