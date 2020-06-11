@@ -37,19 +37,19 @@ class Traject::UMichFormat::BibFormat
   end
 
   def bibformat_cf(type, lev)
-    (type == 'm') && %w[a b c d m s].include?(lev)
+    (type == 'm') && %w[a b c d i m s].include?(lev)
   end
 
   def bibformat_vm(type, lev)
-    %w[g k o r].include?(type) && %w[a b c d m s].include?(lev)
+    %w[g k o r].include?(type) && %w[a b c d i m s].include?(lev)
   end
 
   def bibformat_mu(type, lev)
-    %w[c d i j].include?(type) && %w[a b c d m s].include?(lev)
+    %w[c d i j].include?(type) && %w[a b c d i m s].include?(lev)
   end
 
   def bibformat_mp(type, lev)
-    %w[e f].include?(type) && %w[a b c d m s].include?(lev)
+    %w[e f].include?(type) && %w[a b c d i m s].include?(lev)
   end
 
   def bibformat_se(type, lev)
@@ -57,6 +57,6 @@ class Traject::UMichFormat::BibFormat
   end
 
   def bibformat_mx(type, lev)
-    %w[b p].include?(type) && %w[a b c d m s].include?(lev)
+    %w[b p].include?(type) && %w[a b c d i m s].include?(lev)
   end
 end
