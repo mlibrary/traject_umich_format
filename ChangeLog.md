@@ -1,3 +1,7 @@
+### 0.4.4 / 2020-06-10
+
+* Include "i" bib level in defs for formats other than bk or se.
+
 ### 0.4.0 / 2017-12-01
 
 * Improve recognition of audio and CD formats
