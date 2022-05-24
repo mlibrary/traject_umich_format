@@ -173,7 +173,7 @@ class Traject::UMichFormat::BibTypes
     end
 
     f8524.each do |f|
-      if (f['b'].upcase == 'MUSIC') && (f['j'] =~ /\ACD/i)
+      if (f['b']&.upcase == 'MUSIC') && (f['j'] =~ /\ACD/i)
         types << 'RC'
         break
       end
